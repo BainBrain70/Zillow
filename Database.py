@@ -1,6 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
-def saveToDatabase(df):
+def SaveToDatabase(df):
     server_name = 'DESKTOP-V5J0UI8'
     database_name = 'PropertyManager'
     table_name = 'QuickLook'
@@ -18,4 +18,4 @@ def ReadFromDatabase():
                         f"+SQL+Server&Trusted_Connection=yes"
     engine = create_engine(connection_string, echo=True)
     df = pd.read_sql(f'Select * FROM {table_name}', con=engine)
-    print(df)
+    return df

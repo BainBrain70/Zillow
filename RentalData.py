@@ -97,6 +97,7 @@ def ZillowSetColumns(df):
 
 
 def ZillowSetColumnTypes(df):
+    df.dropna(inplace=True)
     df['ID'] = df['ID'].astype(str)
     df['Address'] = df['Address'].astype(str)
     df['Zipcode'] = df['Zipcode'].astype(str)
@@ -106,4 +107,22 @@ def ZillowSetColumnTypes(df):
     df['Price'] = df['Price'].astype(int)
     df['PriceEstimate'] = df['PriceEstimate'].astype(int)
     df['RentEstimate'] = df['RentEstimate'].astype(int)
+
+
+def RedfinSetColumns(df):
+    df.rename(columns={'listingId': 'ID', 'baths': 'Baths','beds': 'Beds','sqFt.value': 'Sqft',
+                       'streetLine.value': 'Address','zip': 'Zipcode','price.value': 'Price',
+                       'lotSize.value': 'LotSize'}, inplace=True)
+    columns = ['ID', 'Address', 'Zipcode', 'Beds', 'Baths', 'Sqft', 'LotSize', 'Price']
+    return df[columns]
+
+
+def RedfinSetColumnTypes(df):
     df.dropna(inplace=True)
+    df['ID'] = df['ID'].astype(str)
+    df['Address'] = df['Address'].astype(str)
+    df['Zipcode'] = df['Zipcode'].astype(str)
+    df['Beds'] = df['Beds'].astype(str)
+    df['Baths'] = df['Baths'].astype(str)
+    df['LotSize'] = df['LotSize'].astype(str)
+    df['Price'] = df['Price'].astype(int)

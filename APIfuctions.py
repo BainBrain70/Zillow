@@ -2,16 +2,17 @@ import requests
 import pandas as pd
 
 
-def get_listings(api_key, listing_url):
+def get_listings(listing_url):
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
 
     querystring = {
-        "api_key": api_key,
+        "api_key": 'c99d5365-e52d-4591-8805-5529e2cc28f9',
         "url": listing_url
     }
 
-    return requests.request("GET", url, params=querystring)
-
+    response = requests.request("GET", url, params=querystring)
+    df = pd.json_normalize(response.json()["data"]["cat1"]["searchResults"]["mapResults"])
+    return df
 
 def get_property_detail(api_key, zpid):
     url = "https://app.scrapeak.com/v1/scrapers/zillow/property"
@@ -77,7 +78,7 @@ def realtorListings():
     return requests.get(url, headers=headers, params=querystring)
 
 
-def RedfinTest(listing_url):
+def RedfinListing(listing_url):
     url = "https://redfin-com-data.p.rapidapi.com/property/detail"
 
     querystring = {f"url": {listing_url}}
@@ -88,8 +89,11 @@ def RedfinTest(listing_url):
     }
 
     response = requests.get(url, headers=headers, params=querystring)
-    df = pd.json_normalize(response.json()['data'][
-                               'gis?al=1&include_nearby_homes=true&market=sacramento&num_homes=350&ord=redfin'
-                               '-recommended-asc&page_number=1&region_id=38891&region_type=2&sf=1,2,3,5,6,'
-                               '7&start=0&status=9&uipt=1,2,3,4,5,6,7,8&v=8']['homes'])
-    return df
+    # df = pd.json_normalize(response.json()['data'][
+    #                            'gis?al=1&include_nearby_homes=true&market=sacramento&num_homes=350&ord=redfin'
+    #                            '-recommended-asc&page_number=1&region_id=38891&region_type=2&sf=1,2,3,5,6,'
+    #                            '7&start=0&status=9&uipt=1,2,3,4,5,6,7,8&v=8']['homes'])
+
+    return response.json()
+
+
