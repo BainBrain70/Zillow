@@ -14,10 +14,7 @@ def monthly_cash_flow(df, interestRate, monthsOfLoan, insurance, downPaymentDeci
     df["propertyTax"] = round((df["Price"] * .0125) / 12, 2)
     # Calculate Monthly Mortgage
     df["MonthlyMortgagePayment"] = round(
-        ((downPaymentDecimal * df["Price"]) * (interestRate * (1 + interestRate) ** monthsOfLoan)) / ((
-                                                                                                              (
-                                                                                                                      1 + interestRate) ** monthsOfLoan) - 1),
-        2)
+        ((downPaymentDecimal * df["Price"]) * (interestRate * (1 + interestRate) ** monthsOfLoan)) / (((1 + interestRate) ** monthsOfLoan) - 1),2)
 
     # Calculate Monthly Cash Flow
     df["MonthlyCashFlow"] = round(df["RentEstimate"] - (
