@@ -39,19 +39,38 @@ list1 = ['93710', '93728']  # ['93722', '93705', '93711', '93720']
 # temp = RedfinSetColumns(temp)
 # RedfinSetColumnTypes(temp)
 # print(temp)
-
+listing = 'https://www.zillow.com/fresno-ca-93722/?searchQueryState=%7B%22isMapVisible%22%3Atrue%2C%22mapBounds' \
+                  '%22%3A%7B%22north%22%3A36.864590586806386%2C%22south%22%3A36.740198069604425%2C%22east%22%3A-119' \
+                  '.81193359997557%2C%22west%22%3A-119.9590474000244%7D%2C%22filterState%22%3A%7B%22sort%22%3A%7B%22value' \
+                  '%22%3A%22globalrelevanceex%22%7D%2C%22price%22%3A%7B%22min%22%3A0%7D%2C%22mp%22%3A%7B%22min%22%3A0%7D' \
+                  '%2C%22tow%22%3A%7B%22value%22%3Afalse%7D%2C%22con%22%3A%7B%22value%22%3Afalse%7D%2C%22land%22%3A%7B' \
+                  '%22value%22%3Afalse%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22manu%22%3A%7B%22value%22%3Afalse%7D' \
+                  '%7D%2C%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A13%2C%22regionSelection%22%3A%5B%7B%22regionId%22' \
+                  '%3A97431%2C%22regionType%22%3A7%7D%5D%2C%22pagination%22%3A%7B%7D%7D'
 df1 = pd.DataFrame()
-# zipCodes = ZillowZipcodeUrl()
+pages = 0
+zipCodes = ZillowZipcodeUrl()
+for zipcode in zipCodes:
+    pages = ZillowListings()
+    df1 = ZillowListings(zipcode, 1)
+    df1 = ZillowSetColumns(df1)
+
+# SaveToDatabase(df1)
+# for i in temp['results']:
+#     print(i)
+
+print(df1)
 # for zipCode in zipCodes:
 #     df = get_listings(zipCode)
 #     df = ZillowSetColumns(df)
 #     ZillowSetColumnTypes(df)
 #     df1 = pd.concat([df1, df], axis=0)
 #     df1.reset_index(drop=True, inplace=True)
-df1 = pd.read_csv("C:\\Users\\cbain\\Desktop\\listing.csv")
-df1 = ZillowSetColumns(df1)
-ZillowSetColumnTypes(df1)
-df1 = monthly_cash_flow(df1, .07, 360, 100, .20)
-breakEven_df = breakEvenCashFlow(df1, .07)
-# breakEven_df.sort_values(by=['MonthlyCashFlow'])
-print(breakEven_df)
+# SaveToDatabase(df1)
+
+# df1 = ZillowSetColumns(df1)
+# ZillowSetColumnTypes(df1)
+# df1 = monthly_cash_flow(df1, .07, 360, 100, .20)
+# breakEven_df = breakEvenCashFlow(df1, .07)
+# # breakEven_df.sort_values(by=['MonthlyCashFlow'])
+# print(breakEven_df)

@@ -88,8 +88,9 @@ def ZillowSetColumns(df):
                                  'hdpData.homeInfo.price': 'Price', 'hdpData.homeInfo.zestimate': 'PriceEstimate',
                                  'hdpData.homeInfo.rentZestimate': 'RentEstimate', 'zpid': 'ID'}, inplace=True)
 
-    # Selected column for the new dataframe
-    columns = ['ID', 'Address', 'Zipcode', 'Beds', 'Baths', 'Sqft', 'LotSize', 'Price', 'PriceEstimate', 'RentEstimate']
+    # Selected columns for the new dataframe
+    columns = ['ID', 'Address', 'Zipcode', 'Beds', 'Baths', 'Sqft', 'LotSize', 'Price',
+               'PriceEstimate', 'RentEstimate', 'HomeType']
     return df[columns]
 
 
@@ -123,3 +124,6 @@ def RedfinSetColumnTypes(df):
     df['Baths'] = df['Baths'].astype(str)
     df['LotSize'] = df['LotSize'].astype(str)
     df['Price'] = df['Price'].astype(int)
+
+
+
