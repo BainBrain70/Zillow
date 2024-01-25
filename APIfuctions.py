@@ -2,41 +2,41 @@ import requests
 import pandas as pd
 
 
-# def get_listings(listing_url):
-#     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
-#
-#     querystring = {
-#         "api_key": 'c99d5365-e52d-4591-8805-5529e2cc28f9',
-#         "url": listing_url
-#     }
-#
-#     response = requests.request("GET", url, params=querystring)
-#     df = pd.json_normalize(response.json()["data"]["cat1"]["searchResults"]["mapResults"])
-#     return df
-#
-# def get_property_detail(api_key, zpid):
-#     url = "https://app.scrapeak.com/v1/scrapers/zillow/property"
-#
-#     querystring = {
-#         "api_key": api_key,
-#         "zpid": zpid
-#     }
-#     return requests.request("GET", url, params=querystring)
-#
-#
-# def get_zpid(api_key, street, city, state, zip_code=None):
-#     url = "https://app.scrapeak.com/v1/scrapers/zillow/zpidByAddress"
-#
-#     querystring = {
-#         "api_key": api_key,
-#         "street": street,
-#         "city": city,
-#         "state": state,
-#         "zip_code": zip_code
-#     }
-#
-#     return requests.request("GET", url, params=querystring)
-#
+def get_listings(listing_url):
+    url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
+
+    querystring = {
+        "api_key": 'ab8ddf03-94b5-4d52-a90e-3295c0c3dab3',
+        "url": listing_url
+    }
+
+    response = requests.request("GET", url, params=querystring)
+    df = pd.json_normalize(response.json()["data"]["cat1"]["searchResults"]["mapResults"])
+    return df
+
+def get_property_detail(api_key, zpid):
+    url = "https://app.scrapeak.com/v1/scrapers/zillow/property"
+
+    querystring = {
+        "api_key": api_key,
+        "zpid": zpid
+    }
+    return requests.request("GET", url, params=querystring)
+
+
+def get_zpid(api_key, street, city, state, zip_code=None):
+    url = "https://app.scrapeak.com/v1/scrapers/zillow/zpidByAddress"
+
+    querystring = {
+        "api_key": api_key,
+        "street": street,
+        "city": city,
+        "state": state,
+        "zip_code": zip_code
+    }
+
+    return requests.request("GET", url, params=querystring)
+
 
 def rapidAPI_Zipcode():
     url = "https://us-real-estate.p.rapidapi.com/v2/for-sale-by-zipcode"
