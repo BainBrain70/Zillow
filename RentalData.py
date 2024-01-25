@@ -111,7 +111,7 @@ def RedfinSetColumns(df):
     df.rename(columns={'listingId': 'ID', 'baths': 'Baths','beds': 'Beds','sqFt.value': 'Sqft',
                        'streetLine.value': 'Address','zip': 'Zipcode','price.value': 'Price',
                        'lotSize.value': 'LotSize'}, inplace=True)
-    columns = ['ID', 'Address', 'Zipcode', 'Beds', 'Baths', 'Sqft', 'LotSize', 'Price']
+    columns = ['ID', 'Address', 'Zipcode', 'Beds', 'Baths', 'Sqft', 'LotSize', 'Price', 'HomeType']
     return df[columns]
 
 
@@ -126,4 +126,22 @@ def RedfinSetColumnTypes(df):
     df['Price'] = df['Price'].astype(int)
 
 
+def RealtorSetColumns(df):
+    df.rename(columns={'property_id': 'ID', 'list_price': 'Price', 'description.lot_sqft': 'LotSize',
+                       'description.baths': 'Baths', 'description.sqft': 'Sqft', 'description.beds': 'Beds',
+                       'description.type': 'HomeType', 'location.address.line': 'Address',
+                       'location.address.postal_code': 'Zipcode'}, inplace=True)
 
+    columns = ['ID', 'Address', 'Zipcode', 'Beds', 'Baths', 'Sqft', 'LotSize', 'Price', 'HomeType']
+    return df[columns]
+
+
+def RealtorSetColumnTypes(df):
+    df.dropna(inplace=True)
+    df['ID'] = df['ID'].astype(str)
+    df['Address'] = df['Address'].astype(str)
+    df['Zipcode'] = df['Zipcode'].astype(str)
+    df['Beds'] = df['Beds'].astype(str)
+    df['Baths'] = df['Baths'].astype(str)
+    df['LotSize'] = df['LotSize'].astype(str)
+    df['Price'] = df['Price'].astype(int)

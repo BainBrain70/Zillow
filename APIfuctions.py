@@ -2,41 +2,41 @@ import requests
 import pandas as pd
 
 
-def get_listings(listing_url):
-    url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
-
-    querystring = {
-        "api_key": 'c99d5365-e52d-4591-8805-5529e2cc28f9',
-        "url": listing_url
-    }
-
-    response = requests.request("GET", url, params=querystring)
-    df = pd.json_normalize(response.json()["data"]["cat1"]["searchResults"]["mapResults"])
-    return df
-
-def get_property_detail(api_key, zpid):
-    url = "https://app.scrapeak.com/v1/scrapers/zillow/property"
-
-    querystring = {
-        "api_key": api_key,
-        "zpid": zpid
-    }
-    return requests.request("GET", url, params=querystring)
-
-
-def get_zpid(api_key, street, city, state, zip_code=None):
-    url = "https://app.scrapeak.com/v1/scrapers/zillow/zpidByAddress"
-
-    querystring = {
-        "api_key": api_key,
-        "street": street,
-        "city": city,
-        "state": state,
-        "zip_code": zip_code
-    }
-
-    return requests.request("GET", url, params=querystring)
-
+# def get_listings(listing_url):
+#     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
+#
+#     querystring = {
+#         "api_key": 'c99d5365-e52d-4591-8805-5529e2cc28f9',
+#         "url": listing_url
+#     }
+#
+#     response = requests.request("GET", url, params=querystring)
+#     df = pd.json_normalize(response.json()["data"]["cat1"]["searchResults"]["mapResults"])
+#     return df
+#
+# def get_property_detail(api_key, zpid):
+#     url = "https://app.scrapeak.com/v1/scrapers/zillow/property"
+#
+#     querystring = {
+#         "api_key": api_key,
+#         "zpid": zpid
+#     }
+#     return requests.request("GET", url, params=querystring)
+#
+#
+# def get_zpid(api_key, street, city, state, zip_code=None):
+#     url = "https://app.scrapeak.com/v1/scrapers/zillow/zpidByAddress"
+#
+#     querystring = {
+#         "api_key": api_key,
+#         "street": street,
+#         "city": city,
+#         "state": state,
+#         "zip_code": zip_code
+#     }
+#
+#     return requests.request("GET", url, params=querystring)
+#
 
 def rapidAPI_Zipcode():
     url = "https://us-real-estate.p.rapidapi.com/v2/for-sale-by-zipcode"
@@ -64,18 +64,40 @@ def rapidAPI_City():
     return requests.get(url, headers=headers, params=querystring)
 
 
-def realtorListings():
+def RealtorUrlListings():
+    import requests
 
-    url = "https://us-real-estate-listings.p.rapidapi.com/for-sale"
+    url = "https://us-real-estate-listings.p.rapidapi.com/v2/property"
 
-    querystring = {"location": "Fresno, CA", "offset": "0", "limit": "1"}
+    querystring = {
+        "property_url": "https://www.realtor.com/realestateandhomes-detail/4666-E-Orleans-Ave_Fresno_CA_93702_M15563-75055?from=srp-list-card"}
 
     headers = {
         "X-RapidAPI-Key": "8c4d33ab1fmsh042342b8342f6f9p1a302djsnf9ae6918b4b9",
         "X-RapidAPI-Host": "us-real-estate-listings.p.rapidapi.com"
     }
 
-    return requests.get(url, headers=headers, params=querystring)
+    response = requests.get(url, headers=headers, params=querystring)
+
+    print(response.json())
+
+
+def RealtorLocationListings(location):
+    df = pd.DataFrame()
+    url = "https://us-real-estate-listings.p.rapidapi.com/for-sale"
+
+    querystring = {"location": location, "offset": "0", "limit": "200"}
+
+    headers = {
+        "X-RapidAPI-Key": "8c4d33ab1fmsh042342b8342f6f9p1a302djsnf9ae6918b4b9",
+        "X-RapidAPI-Host": "us-real-estate-listings.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    df = pd.json_normalize(response.json()['listings'])
+    return df
+
 
 
 def RedfinListingCity(listing_url):
