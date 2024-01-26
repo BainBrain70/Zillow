@@ -3,6 +3,7 @@ import pandas as pd
 
 
 def get_listings(listing_url):
+    df = pd.DataFrame()
     url = "https://app.scrapeak.com/v1/scrapers/zillow/listing"
 
     querystring = {
@@ -13,6 +14,7 @@ def get_listings(listing_url):
     response = requests.request("GET", url, params=querystring)
     df = pd.json_normalize(response.json()["data"]["cat1"]["searchResults"]["mapResults"])
     return df
+
 
 def get_property_detail(api_key, zpid):
     url = "https://app.scrapeak.com/v1/scrapers/zillow/property"
@@ -152,14 +154,13 @@ def ZillowListings(listing_url, pageNumber):
 
 
 def ZillowZipcodeUrl():
-    Zillow93722 = 'https://zillow.com/fresno-ca-93722/?searchQueryState=%7B%22isMapVisible%22%3Atrue%2C%22mapBounds' \
-                  '%22%3A%7B%22north%22%3A36.871937850818554%2C%22south%22%3A36.73283815503686%2C%22east%22%3A-119' \
-                  '.78077706005858%2C%22west%22%3A-119.9902039399414%7D%2C%22usersSearchTerm%22%3A%228153%20N%20Cedar' \
-                  '%20Ave%20%23129%20Fresno%2C%20CA%2093720%22%2C%22filterState%22%3A%7B%22sort%22%3A%7B%22value%22' \
-                  '%3A%22globalrelevanceex%22%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22tow%22%3A%7B%22value%22' \
-                  '%3Afalse%7D%2C%22con%22%3A%7B%22value%22%3Afalse%7D%2C%22apco%22%3A%7B%22value%22%3Afalse%7D%2C' \
-                  '%22land%22%3A%7B%22value%22%3Afalse%7D%2C%22manu%22%3A%7B%22value%22%3Afalse%7D%7D%2C' \
-                  '%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A12%2C%22regionSelection%22%3A%5B%7B%22regionId%22' \
+    Zillow93722 = 'https://www.zillow.com/fresno-ca-93722/?searchQueryState=%7B%22isMapVisible%22%3Atrue%2C%22mapBounds' \
+                  '%22%3A%7B%22north%22%3A36.864590586806386%2C%22south%22%3A36.740198069604425%2C%22east%22%3A-119' \
+                  '.81193359997557%2C%22west%22%3A-119.9590474000244%7D%2C%22filterState%22%3A%7B%22sort%22%3A%7B%22value' \
+                  '%22%3A%22globalrelevanceex%22%7D%2C%22price%22%3A%7B%22min%22%3A0%7D%2C%22mp%22%3A%7B%22min%22%3A0%7D' \
+                  '%2C%22tow%22%3A%7B%22value%22%3Afalse%7D%2C%22con%22%3A%7B%22value%22%3Afalse%7D%2C%22land%22%3A%7B' \
+                  '%22value%22%3Afalse%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22manu%22%3A%7B%22value%22%3Afalse%7D' \
+                  '%7D%2C%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A13%2C%22regionSelection%22%3A%5B%7B%22regionId%22' \
                   '%3A97431%2C%22regionType%22%3A7%7D%5D%2C%22pagination%22%3A%7B%7D%7D'
 
     Zillow93720 = 'https://www.zillow.com/fresno-ca-93720/?searchQueryState=%7B%22isMapVisible%22%3Atrue%2C' \
@@ -222,6 +223,6 @@ def ZillowZipcodeUrl():
                   '%2C%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A13%2C%22regionSelection%22%3A%5B%7B%22regionId%22' \
                   '%3A97434%2C%22regionType%22%3A7%7D%5D%2C%22pagination%22%3A%7B%7D%7D'
 
-    zipCodeUrls = [Zillow93722, Zillow93726, Zillow93728, Zillow93711, Zillow93710, Zillow93705, Zillow93720]
+    zipCodeUrls = [Zillow93726, Zillow93728, Zillow93711, Zillow93710, Zillow93705, Zillow93720, Zillow93722]
 
     return zipCodeUrls

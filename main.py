@@ -45,9 +45,9 @@ listing = 'https://www.zillow.com/fresno-ca-93722/?searchQueryState=%7B%22isMapV
                   '%22value%22%3Afalse%7D%2C%22ah%22%3A%7B%22value%22%3Atrue%7D%2C%22manu%22%3A%7B%22value%22%3Afalse%7D' \
                   '%7D%2C%22isListVisible%22%3Atrue%2C%22mapZoom%22%3A13%2C%22regionSelection%22%3A%5B%7B%22regionId%22' \
                   '%3A97431%2C%22regionType%22%3A7%7D%5D%2C%22pagination%22%3A%7B%7D%7D'
-# df1 = pd.DataFrame()
+df1 = pd.DataFrame()
 # pages = 0
-# zipCodes = ZillowZipcodeUrl()
+zipCodes = ZillowZipcodeUrl()
 # for zipcode in zipCodes:
 #     pages = ZillowListings()
 #     df1 = ZillowListings(zipcode, 1)
@@ -58,13 +58,16 @@ listing = 'https://www.zillow.com/fresno-ca-93722/?searchQueryState=%7B%22isMapV
 #     print(i)
 
 
-# for zipCode in zipCodes:
-#     df = get_listings(zipCode)
+# for zipcode in zipCodes:
+#     df = get_listings(zipcode)
 #     df = ZillowSetColumns(df)
 #     ZillowSetColumnTypes(df)
 #     df1 = pd.concat([df1, df], axis=0)
 #     df1.reset_index(drop=True, inplace=True)
 # SaveToDatabase(df1)
+# df1.to_csv('C:\\Users\\cbain\\Desktop\\listing.csv')
+# print(df1)
+
 
 # df1 = ZillowSetColumns(df1)
 # ZillowSetColumnTypes(df1)
@@ -73,7 +76,7 @@ listing = 'https://www.zillow.com/fresno-ca-93722/?searchQueryState=%7B%22isMapV
 # # breakEven_df.sort_values(by=['MonthlyCashFlow'])
 # print(breakEven_df)
 
-df = RealtorLocationListings('93720')
-df = RealtorSetColumns(df)
-RealtorSetColumnTypes(df)
-print(df)
+# df = RealtorLocationListings('93720')
+# df = RealtorSetColumns(df)
+# RealtorSetColumnTypes(df)
+# print(df)
