@@ -87,7 +87,7 @@ def ZillowSetColumns(df):
                                  'hdpData.homeInfo.lotAreaValue': 'LotSize',
                                  'hdpData.homeInfo.price': 'Price', 'hdpData.homeInfo.zestimate': 'PriceEstimate',
                                  'hdpData.homeInfo.rentZestimate': 'RentEstimate', 'zpid': 'ID'}, inplace=True)
-
+    df['RentPriceRatio'] = df['RentEstimate'] / df['Price']
     # Selected columns for the new dataframe
     columns = ['ID', 'Address', 'Zipcode', 'Beds', 'Baths', 'Sqft', 'LotSize', 'Price',
                'PriceEstimate', 'RentEstimate', 'HomeType']
@@ -95,7 +95,6 @@ def ZillowSetColumns(df):
 
 
 def ZillowSetColumnTypes(df):
-    df.dropna(inplace=True)
     df['ID'] = df['ID'].astype(str)
     df['Address'] = df['Address'].astype(str)
     df['Zipcode'] = df['Zipcode'].astype(str)
@@ -105,6 +104,7 @@ def ZillowSetColumnTypes(df):
     df['Price'] = df['Price'].astype(int)
     df['PriceEstimate'] = df['PriceEstimate'].astype(int)
     df['RentEstimate'] = df['RentEstimate'].astype(int)
+    df['RentPriceRatio'] = df['RentPriceRatio'].astype(int)
 
 
 def RedfinSetColumns(df):

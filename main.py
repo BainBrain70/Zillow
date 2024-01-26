@@ -6,6 +6,7 @@ import warnings
 from APIfuctions import *
 from RentalData import *
 from Database import *
+from Graphs import *
 
 # settings
 warnings.filterwarnings("ignore")
@@ -80,3 +81,10 @@ zipCodes = ZillowZipcodeUrl()
 # df = RealtorSetColumns(df)
 # RealtorSetColumnTypes(df)
 # print(df)
+
+df1 = pd.read_csv('C:\\Users\\cbain\\Desktop\\listing.csv')
+
+fig, axs = plt.subplots(2,1)
+axs[0,0] = RentPerSqft(df1)
+axs[1,0] = RentByZipcode(df1)
+plt.show()
